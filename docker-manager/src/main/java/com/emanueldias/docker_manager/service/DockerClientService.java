@@ -3,16 +3,18 @@ package com.emanueldias.docker_manager.service;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.Image;
-import org.jvnet.hk2.annotations.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Service
+
 public class DockerClientService {
 
-    @Autowired
-    private DockerClient dockerClient;
+    private final DockerClient dockerClient;
+
+    public DockerClientService(DockerClient dockerClient) {
+        this.dockerClient = dockerClient;
+    }
+
 
     public List<Container> listAllContainers(){
         return dockerClient.listContainersCmd().withShowAll(true).exec();

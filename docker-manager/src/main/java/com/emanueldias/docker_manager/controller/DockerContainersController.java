@@ -13,8 +13,13 @@ import java.util.List;
 @RequestMapping("/containers")
 public class DockerContainersController {
 
-    @Autowired
-    private DockerClientService dockerClientService;
+
+    private final DockerClientService dockerClientService;
+
+    public DockerContainersController(DockerClientService dockerClientService) {
+        this.dockerClientService = dockerClientService;
+    }
+
 
     @GetMapping("/all")
     public ResponseEntity<List<Container>> getAllContainers(){

@@ -1,5 +1,6 @@
 package com.emanueldias.docker_manager.config;
 
+import com.emanueldias.docker_manager.service.DockerClientService;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
@@ -32,5 +33,10 @@ public class DockerClientConfig {
 
         return DockerClientBuilder.getInstance(dockerClientConfig).withDockerHttpClient(apacheDockerHttpClient).build();
 
+    }
+
+    @Bean
+    public DockerClientService dockerClientService() {
+        return new DockerClientService(buildDockerClient());
     }
 }
